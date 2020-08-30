@@ -1,0 +1,998 @@
+﻿
+@{
+    ViewBag.Title = "Home Page";
+}
+@*table*@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+@*table*@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="text/html; charset=iso-8859-2" http-equiv="Content-Type">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<meta charset="utf-8">
+
+<script>/* Credits:
+* https://www.developphp.com/video/JavaScript/Circular-Progress-Loader-Canvas-JavaScript-Programming-Tutorial
+*/
+
+    (function () {
+
+        var Progress = function (element) {
+
+            this.context = element.getContext("2d");
+            this.refElement = element.parentNode;
+            this.loaded = 0;
+            this.start = 4.72;
+            this.width = this.context.canvas.width;
+            this.height = this.context.canvas.height;
+            this.total = parseInt(this.refElement.dataset.percent, 10);
+            this.timer = null;
+
+            this.diff = 0;
+
+            this.init();
+        };
+
+        Progress.prototype = {
+            init: function () {
+                var self = this;
+                self.timer = setInterval(function () {
+                    self.run();
+                }, 25);
+            },
+            run: function () {
+                var self = this;
+
+                self.diff = ((self.loaded / 100) * Math.PI * 2 * 10).toFixed(2);
+                self.context.clearRect(0, 0, self.width, self.height);
+                self.context.lineWidth = 10;
+                self.context.fillStyle = "#000";
+                self.context.strokeStyle = "#00244A";
+                self.context.textAlign = "center";
+
+                self.context.fillText(self.loaded + "%", self.width * .5, self.height * .5 + 2, self.width);
+                self.context.beginPath();
+                self.context.arc(35, 35, 30, self.start, self.diff / 10 + self.start, false);
+                self.context.stroke();
+
+                if (self.loaded >= self.total) {
+                    clearInterval(self.timer);
+                }
+
+                self.loaded++;
+            }
+        };
+
+        var CircularSkillBar = function (elements) {
+            this.bars = document.querySelectorAll(elements);
+            if (this.bars.length > 0) {
+                this.init();
+            }
+        };
+
+        CircularSkillBar.prototype = {
+            init: function () {
+                this.tick = 25;
+                this.progress();
+
+            },
+            progress: function () {
+                var self = this;
+                var index = 0;
+                var firstCanvas = self.bars[0].querySelector("canvas");
+                var firstProg = new Progress(firstCanvas);
+
+
+
+                var timer = setInterval(function () {
+                    index++;
+
+                    var canvas = self.bars[index].querySelector("canvas");
+                    var prog = new Progress(canvas);
+
+                    if (index == self.bars.length) {
+                        clearInterval(timer);
+                    }
+
+                }, self.tick * 100);
+
+            }
+        };
+
+        document.addEventListener("DOMContentLoaded", function () {
+            var circularBars = new CircularSkillBar("#bars .bar");
+        });
+
+    })();
+    /*end*/
+
+    /*anchor*/
+
+    function myFunctionicon(x) {
+        x.classList.toggle("fa-kiss-wink-heart");
+    }</script>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<style>
+
+    .img-fluid {
+        width: 100%;
+        height: auto;
+    }
+
+    .name {
+        font-family: Rubik;
+        font-size: 25px;
+        text-align: center;
+        color: #00244A;
+        letter-spacing: 3px;
+    }
+
+    .text {
+        font-family: Karla;
+        font-size: 18px;
+        text-align: center;
+        color: #4A2600;
+        letter-spacing: 2px;
+    }
+
+    .paragraphtext {
+        font-family: "SF Pro Display","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
+        font-size: 15px;
+        font-weight: bold;
+        text-align: center;
+        color: #292824;
+    }
+    /*skill bar*/
+    #bars {
+        margin: 2em auto;
+        max-width: 960px;
+        overflow: hidden;
+    }
+
+    .bar {
+        float: left;
+        width: 30%;
+        text-align: center;
+    }
+
+        .bar h3 {
+            font-size: 1.4em;
+            font-weight: normal;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+    .bar-circle {
+        display: block;
+        margin: 0.7em auto;
+    }
+    /*skill bar*/
+    /*Team Member*/
+
+
+    .our-teams {
+        padding: 30px 0 40px;
+        margin-bottom: 30px;
+        background-color: #f7f5ec;
+        text-align: center;
+        overflow: hidden;
+        position: relative;
+    }
+
+        .our-teams .pictures {
+            display: inline-block;
+            height: 130px;
+            width: 130px;
+            margin-bottom: 50px;
+            z-index: 1;
+            position: relative;
+        }
+
+            .our-teams .pictures::before {
+                content: "";
+                width: 100%;
+                height: 0;
+                border-radius: 50%;
+                background-color: #1369ce;
+                position: absolute;
+                bottom: 135%;
+                right: 0;
+                left: 0;
+                opacity: 0.9;
+                transform: scale(3);
+                transition: all 0.3s linear 0s;
+            }
+
+        .our-teams:hover .pictures::before {
+            height: 100%;
+        }
+
+        .our-teams .pictures::after {
+            content: "";
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-color: #1369ce;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .our-teams .pictures img {
+            width: 100%;
+            height: auto;
+            border-radius: 50%;
+            transform: scale(1);
+            transition: all 0.9s ease 0s;
+        }
+
+        .our-teams:hover .pictures img {
+            box-shadow: 0 0 0 14px #f7f5ec;
+            transform: scale(0.7);
+        }
+
+        .our-teams .title {
+            display: block;
+            font-size: 15px;
+            color: #4e5052;
+            text-transform: capitalize;
+        }
+
+        .our-teams .social {
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            background-color: #1369ce;
+            position: absolute;
+            bottom: -100px;
+            left: 0;
+            transition: all 0.5s ease 0s;
+        }
+
+        .our-teams:hover .social {
+            bottom: 0;
+        }
+
+        .our-teams .social li {
+            display: inline-block;
+        }
+
+            .our-teams .social li a {
+                display: block;
+                padding: 10px;
+                font-size: 17px;
+                color: white;
+                transition: all 0.3s ease 0s;
+                text-decoration: none;
+            }
+
+                .our-teams .social li a:hover {
+                    color: #1369ce;
+                    background-color: #f7f5ec;
+                }
+
+    /*Team Member*/
+    /*Dots*/
+    /*Huge thanks to @@tobiasahlin at http://tobiasahlin.com/spinkit/ */
+    .spinner {
+        margin: 100px auto 0;
+        width: 70px;
+        text-align: center;
+    }
+
+        .spinner > div {
+            width: 18px;
+            height: 18px;
+            background-color: #333;
+            border-radius: 100%;
+            display: inline-block;
+            -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+            animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+        }
+
+        .spinner .bounce1 {
+            -webkit-animation-delay: -0.32s;
+            animation-delay: -0.32s;
+        }
+
+        .spinner .bounce2 {
+            -webkit-animation-delay: -0.16s;
+            animation-delay: -0.16s;
+        }
+
+    @@-webkit-keyframes sk-bouncedelay {
+        0%, 80%, 100% {
+            -webkit-transform: scale(0)
+        }
+
+        40% {
+            -webkit-transform: scale(1.0)
+        }
+    }
+
+    @@keyframes sk-bouncedelay {
+        0%, 80%, 100% {
+            -webkit-transform: scale(0);
+            transform: scale(0);
+        }
+
+        40% {
+            -webkit-transform: scale(1.0);
+            transform: scale(1.0);
+        }
+    }
+    /* end Dots*/
+
+
+
+
+    table {
+        border: 1px solid #ccc;
+        border-collapse: collapse;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        table-layout: fixed;
+    }
+
+        table caption {
+            font-size: 1.5em;
+            margin: .5em 0 .75em;
+        }
+
+        table tr {
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            padding: .35em;
+        }
+
+        table th,
+        table td {
+            padding: .625em;
+            text-align: center;
+        }
+
+        table th {
+            font-size: .85em;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+        }
+
+    @@media screen and (max-width: 600px) {
+        table {
+            border: 0;
+        }
+
+            table caption {
+                font-size: 1.3em;
+            }
+
+            table thead {
+                border: none;
+                clip: rect(0 0 0 0);
+                height: 1px;
+                margin: -1px;
+                overflow: hidden;
+                padding: 0;
+                position: absolute;
+                width: 1px;
+            }
+
+            table tr {
+                border-bottom: 3px solid #ddd;
+                display: block;
+                margin-bottom: .625em;
+            }
+
+            table td {
+                border-bottom: 1px solid #ddd;
+                display: block;
+                font-size: .8em;
+                text-align: right;
+            }
+
+                table td::before {
+                    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+                    content: attr(data-label);
+                    float: left;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                }
+
+                table td:last-child {
+                    border-bottom: 0;
+                }
+    }
+
+    .tdcolor {
+        background: #66578e;
+    }
+    /*block*/
+    * {
+        box-sizing: border-box;
+    }
+
+    /* Create two equal columns that floats next to each other */
+    .column1 {
+        float: left;
+        width: 50%;
+        padding: 10px;
+        height: 280px; /* Should be removed. Only for demonstration */
+    }
+
+    /* Clear floats after the columns */
+    .row1:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    /*end block*/
+    /*transparent*/
+    .transparent {
+        background: url(~/img/blending.jpg) repeat;
+        border: 2px solid black;
+    }
+
+    div.transbox {
+        margin: 30px;
+        background-color: #ffffff;
+        border: 1px solid black;
+        opacity: 0.6;
+        filter: alpha(opacity=60); /* For IE8 and earlier */
+    }
+    /*end transparent*/
+
+    /*gallery*/
+
+    .row2 {
+        display: -ms-flexbox; /* IE10 */
+        display: flex;
+        -ms-flex-wrap: wrap; /* IE10 */
+        flex-wrap: wrap;
+        padding: 0 4px;
+    }
+
+    /* Create four equal columns that sits next to each other */
+    .column2 {
+        -ms-flex: 25%; /* IE10 */
+        flex: 25%;
+        max-width: 25%;
+        padding: 0 4px;
+    }
+
+        .column2 img {
+            margin-top: 8px;
+            vertical-align: middle;
+            width: 100%;
+        }
+
+    /* Responsive layout - makes a two column-layout instead of four columns */
+    @@media screen and (max-width: 800px) {
+        .column2 {
+            -ms-flex: 50%;
+            flex: 50%;
+            max-width: 50%;
+        }
+    }
+
+    /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+    @@media screen and (max-width: 600px) {
+        .column2 {
+            -ms-flex: 100%;
+            flex: 100%;
+            max-width: 100%;
+        }
+    }
+
+
+    /*overley*/
+    .container1 {
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .image1 {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .overlay {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+        transition: .3s ease;
+        background-color: #902828;
+    }
+
+    .container1:hover .overlay {
+        opacity: 1;
+    }
+
+    .icon {
+        color: white;
+        font-size: 100px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        text-align: center;
+    }
+
+    .fa-user:hover {
+        color: white;
+    }
+</style>
+<div class="main" id="section2">
+
+    <div class="container">
+        <img class="img-fluid" src="~/img/tenor.gif" alt="Banner" style="height:250px">
+        <p class="name">Su Way Hnin</p><br />
+        <p class="text">Developer</p>
+    </div>
+    <br />
+    <p style="text-align:center;font-size:22px;">
+
+        <u> @Html.ActionLink("Japanese", "About", "Home")</u> | <u>@Html.ActionLink("English", "Index", "Home")</u>
+
+    </p>
+</div>
+<div class="container">
+
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <img class="img-fluid" src="~/img/subanner2.jpg" alt="Los Angeles">
+            </div>
+            <div class="item">
+                <img class="img-fluid" src="~/img/subanner1.jpeg" alt="Chicago">
+            </div>
+            <div class="item">
+                <img class="img-fluid" src="~/img/subanner4.jpg" alt="Chicago">
+            </div>
+
+
+        </div>
+
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+<br />
+<p class="name">Who I am</p>
+<br />
+
+<p class="paragraphtext">I am Su Way Hnin from University of Computer Studies,Yangon.You can call me 'Su'.<p>
+   
+<br />
+<p class="name">Services</p>
+<br />
+<p class="paragraphtext">I can develop the websites with the lowest cost and the best design.Trust me,I can paint ur life to be perfect. </p>
+<p class="name">What I Do</p>
+<br />
+<p class="paragraphtext">WEB AND ANDROID developer, INTERESTED IN C# and JAVA LANGUAGES & can do work for JAVASCRIPT,HTML,CSS,J2EE and SE,Web Design and asp.net MVC,JAVA ,C#.I developed more than 15 websites with Asp.net MVC  as a freelancer.</p>
+<br />
+<br />
+<div class="container">
+    <div style="background-color:#b8b0ce">
+        <br />
+        <p class="name">Responsibility</p><br />
+        <br />
+        <div id="bars" style="align-content:center;">
+
+            <div class="bar" data-percent="100">
+                <span class="skill">Quality</span>
+                <canvas class="bar-circle" width="70" height="70"></canvas>
+            </div>
+
+            <div class="bar" data-percent="100">
+                <span class="skill">Skill</span>
+                <canvas class="bar-circle" width="70" height="70"></canvas>
+            </div>
+
+            <div class="bar" data-percent="100">
+                <span class="skill">Reliability</span>
+                <canvas class="bar-circle" width="70" height="70"></canvas>
+            </div>
+
+            <div class="bar" data-percent="100">
+                <span class="skill">Safety</span>
+                <canvas class="bar-circle" width="70" height="70"></canvas>
+            </div>
+
+            <div class="bar" data-percent="100">
+                <span class="skill">Fair Price</span>
+                <canvas class="bar-circle" width="70" height="70"></canvas>
+            </div>
+            <div class="bar" data-percent="100">
+                <span class="skill">Host Plan</span>
+                <canvas class="bar-circle" width="70" height="70"></canvas>
+            </div>
+        </div>
+        <br />
+    </div>
+</div>
+@*image card*@
+<br />
+<p class="name">My Team</p>
+<br />
+
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="our-teams">
+                <div class="pictures">
+                    <img class="img-fluid" src="~/team/wymp (1).jpg">
+                </div>
+                <div class="team-content">
+                    <h5>Wai Yan Min Paing</h5>
+                    <h6>Network Engineer</h6>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="our-teams">
+                <div class="pictures">
+                    <img class="img-fluid" src="~/team/may1.jpg">
+                </div>
+                <div class="team-content">
+                    <h5>May Phoo Wai</h5>
+                    <h6>Web Developer</h6>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="our-teams">
+                <div class="pictures">
+                    <img class="img-fluid" src="~/team/waig.jpg">
+                </div>
+                <div class="team-content">
+                    <h5>Thazin Wai</h5>
+                    <h6>Android Developer</h6>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="our-teams">
+                <div class="pictures">
+                    <img class="img-fluid" src="~/team/htet.jpg">
+                </div>
+                <div class="team-content">
+                    <h5>Htet Htet Aung</h5>
+                    <h6>Web Designer</h6>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="spinner">
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+</div>
+<br />
+<div class="transparent" style="background-color:#b8b0ce;">
+    <br />
+    <div class="transbox">
+        <p class="name">LANGUAGE SKILLS</p><br />
+        <div id="bars" style="align-content:center;">
+
+            <div class="bar" data-percent="100">
+                <span class="skill">C++</span>
+                <canvas class="bar-circle" width="70" height="70"></canvas>
+            </div>
+
+            <div class="bar" data-percent="100">
+                <span class="skill">JAVA</span>
+                <canvas class="bar-circle" width="70" height="70"></canvas>
+            </div>
+
+            <div class="bar" data-percent="100">
+                <span class="skill">C#</span>
+                <canvas class="bar-circle" width="70" height="70"></canvas>
+            </div>
+
+            <div class="bar" data-percent="100">
+                <span class="skill">MVC</span>
+                <canvas class="bar-circle" width="70" height="70"></canvas>
+            </div>
+
+            <div class="bar" data-percent="100">
+                <span class="skill">DOM</span>
+                <canvas class="bar-circle" width="70" height="70"></canvas>
+            </div>
+            <div class="bar" data-percent="100">
+                <span class="skill">DBMS</span>
+                <canvas class="bar-circle" width="70" height="70"></canvas>
+            </div>
+        </div>
+        <br />
+    </div>
+</div>
+<div class="spinner">
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+</div>
+<br />
+<div class="container" style="background-color:#b8b0ce">
+    <br />
+    <div style="text-align: center">
+        <i class="fa fa-trophy" aria-hidden="true" style="font-size:33px"></i>
+        <span style="font-family: Rubik;
+        font-size: 25px;
+        text-align: center;
+        color: #00244A;"> ACHIEVEMENTS</span>
+    </div>
+    <br />
+
+    <i class="fa fa-trophy" aria-hidden="true" style="font-size:17px"></i>
+    <span style="font-family: Rubik;
+        font-size: 15px;
+        text-align: center;
+        color: #00244A;">Successfully completed SAMSUNG ANDROID Training program in 2017.</span>
+    <br />
+
+    <i class="fa fa-trophy" aria-hidden="true" style="font-size:17px"></i>
+    <span style="font-family: Rubik;
+        font-size: 15px;
+        text-align: center;
+        color: #00244A;">Successfully completed MVC website training in 2018.</span>
+    <br />
+    <i class="fa fa-trophy" aria-hidden="true" style="font-size:17px"></i>
+    <span style="font-family: Rubik;
+        font-size: 15px;
+        text-align: center;
+        color: #00244A;">Successfully completed Web Design Training in 2018.</span>
+    <br />
+    <i class="fa fa-trophy" aria-hidden="true" style="font-size:17px"></i>
+    <span style="font-family: Rubik;
+        font-size: 15px;
+        text-align: center;
+        color: #00244A">Get certificate from Thanlyin Technological University for volunteering their students with C# languages in 2018.</span>
+    <br />
+    <i class="fa fa-trophy" aria-hidden="true" style="font-size:17px"></i>
+    <span style="font-family: Rubik;
+        font-size: 15px;
+        text-align: center;
+        color: #00244A">Certificate for volunteering ICPC in 2018</span>
+    <br />
+    <i class="fa fa-trophy" aria-hidden="true" style="font-size:17px"></i>
+    <span style="font-family: Rubik;
+        font-size: 15px;
+        text-align: center;
+        color: #00244A;">Certificate for internship at Golden Myanmar Apex Company.</span>
+    <br />
+    <br />
+    <br />
+</div>
+
+<div class="spinner">
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+</div>
+<br />
+<br />
+<div class="container" style="background-color:#f7f5ec">
+    <div style="text-align: center">
+        <br />
+        <div style="text-align: center">
+            <i class="fa fa-language" aria-hidden="true" style="font-size:33px"></i>
+            <span style="font-family: Rubik;
+        font-size: 25px;
+        text-align: center;
+        color: #00244A;
+        letter-spacing: 3px;">PROFICIENCY IN LANGUAGES</span>
+        </div>
+        <br />
+
+        <table border="1">
+
+            <tr>
+                <td scope="col" colspan="2" style="text-align:center"><b>English</b></td>
+                <td class="tdcolor" data-label="Read">Best</td>
+                <td data-label="Read">Better</td>
+                <td data-label="Read">Good</td>
+                <td data-label="Write">Best</td>
+                <td class="tdcolor" data-label="Write">Better</td>
+                <td data-label="Write">Good</td>
+                <td data-label="Speak">Best</td>
+                <td class="tdcolor" data-label="Speak">Better</td>
+                <td data-label="Speak">Good</td>
+                <td data-label="Presentation Skills">Best</td>
+                <td data-label="Presentation Skills">Better</td>
+                <td class="tdcolor" data-label="Presentation Skills">Good</td>
+            </tr>
+            <tr>
+                <td scope="col" colspan="2" style="text-align:center"><b>Japanese</b></td>
+                <td data-label="Read">Best</td>
+                <td data-label="Read">Better</td>
+                <td class="tdcolor" data-label="Read">Good</td>
+                <td data-label="Write">Best</td>
+                <td data-label="Write">Better</td>
+                <td class="tdcolor" data-label="Write">Good</td>
+                <td data-label="Speak">Best</td>
+                <td data-label="Speak">Better</td>
+                <td class="tdcolor" data-label="Speak">Good</td>
+                <td data-label="Presentation Skills">Best</td>
+                <td data-label="Presentation Skills">Better</td>
+                <td class="tdcolor" data-label="Presentation Skills">Good</td>
+            </tr>
+        </table>
+    </div>
+
+    <br />
+    <br />
+</div>
+<div class="spinner">
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+</div>
+<div style="text-align: center">
+    <br />
+    <div style="text-align: center">
+        <i class="fa fa-laptop" aria-hidden="true" style="font-size:33px"></i>
+        <span style="font-family: Rubik;
+        font-size: 25px;
+        text-align: center;
+        color: #00244A;
+        letter-spacing: 3px;">COMPUTER LITERACY</span>
+    </div>
+    <br />
+</div>
+<div class="row1">
+    <div class="column1" style="background-color:#aaa;">
+        <h4 style="color:#66578e">Application Software</h4>
+        <h5>MS Office : Advance</h5>
+    </div>
+    <div class="column1" style="background-color:#bbb;">
+        <h4 style="color:#66578e">Programming Software</h4>
+        <h5>Eclipse       : Professional</h5>
+        <h5>Visual Studio : Professional</h5>
+        <h5>Android Studio: Basic</h5>
+        <h5>Turbo C       : Professional</h5>
+    </div>
+</div>
+<br />
+<br />
+
+<div style="text-align: center">
+    <div class="main" id="section1">
+        <a href="#section2"> <i class="fa fa-chevron-circle-up aria-hidden="true" style="font-size:33px"></i></a>
+    </div>
+</div>
+<div style="text-align: center">
+    <br />
+    <div style="text-align: center">
+        <i class="fa fa-photo" aria-hidden="true" style="font-size:33px"></i>
+        <span style="font-family: Rubik;
+        font-size: 25px;
+        text-align: center;
+        color: #00244A;
+        letter-spacing: 3px;">Gallery</span>
+    </div>
+    <br />
+</div>
+
+<div class="row2">
+    <div class="column2">
+
+        <div class="container1">
+            <img src="~/img/s1.jpg" alt="Avatar" class="image1">
+            <div class="overlay">
+                <a class="icon" title="My Trip to Japan">
+                    <i onclick="myFunctionicon(this)" class="far fa-grin-hearts" style="color:red"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="container1">
+            <img src="~/img/s22.jpg" alt="Avatar" class="image1">
+            <div class="overlay">
+                <a class="icon" title="My Trip to Japan">
+                    <i onclick="myFunctionicon(this)" class="far fa-grin-hearts" style="color:red"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="column2">
+        <div class="container1">
+            <img src="~/img/s5.jpg" alt="Avatar" class="image1">
+            <div class="overlay">
+                <a class="icon" title="My Trip to Japan">
+                    <i onclick="myFunctionicon(this)" class="far fa-grin-hearts" style="color:red"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="container1">
+            <img src="~/img/s14.jpg" alt="Avatar" class="image1">
+            <div class="overlay">
+                <a class="icon" title="My Trip to Japan">
+                    <i onclick="myFunctionicon(this)" class="far fa-grin-hearts" style="color:red"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="column2">
+        <div class="container1">
+            <img src="~/img/s18.jpg" alt="Avatar" class="image1">
+            <div class="overlay">
+                <a class="icon" title="My Trip to Japan">
+                    <i onclick="myFunctionicon(this)" class="far fa-grin-hearts" style="color:red"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="container1">
+            <img src="~/img/s19.jpg" alt="Avatar" class="image1">
+            <div class="overlay">
+                <a class="icon" title="My Trip to Japan">
+                    <i onclick="myFunctionicon(this)" class="far fa-grin-hearts" style="color:red"></i>
+                </a>
+            </div>
+        </div>
+
+    </div>
+    <div class="column2">
+        <div class="container1">
+            <img src="~/img/s8.jpg" alt="Avatar" class="image1">
+            <div class="overlay">
+                <a class="icon" title="My Trip to Japan">
+                    <i onclick="myFunctionicon(this)" class="far fa-grin-hearts" style="color:red"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="container1">
+            <img src="~/img/s9.jpg" alt="Avatar" class="image1">
+            <div class="overlay">
+                <a class="icon" title="My Trip to Japan">
+                    <i onclick="myFunctionicon(this)" class="far fa-grin-hearts" style="color:red"></i>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
